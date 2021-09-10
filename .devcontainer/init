@@ -1,0 +1,18 @@
+#!/usr/bin/env zx
+
+await Promise.all([
+  $`go mod download`,
+  $`cd ui && npm i`,
+  (async function () {
+    try {
+      await $`k3d cluster create kubecost -p 8090:80@loadbalancer --registry-create`
+      await $`sleep 5`
+    } catch (ex) {
+      if (!ex.stderr.includes("name already exists")) {
+        throw ex
+      }
+    }
+  })()
+])
+
+await $`kubectl apply -f .devcontainer/manifests`
