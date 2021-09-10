@@ -2,6 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: cost-model
+  namespace: cost-model
 spec:
   selector:
     app: cost-model
@@ -10,3 +11,21 @@ spec:
     - name: cost-model
       port: 9003
       targetPort: 9003
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cost-model
+  namespace: cost-model
+spec:
+  rules:
+  - host: "cost.localtest.me"
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: cost-model
+            port:
+              number: 9003
