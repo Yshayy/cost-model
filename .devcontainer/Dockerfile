@@ -34,6 +34,7 @@ RUN curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
 # install Helm 
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
+RUN apt update
 ### Installing golang 1.16
 RUN curl -L https://golang.org/dl/go1.16.linux-amd64.tar.gz | sudo tar -xz -C /usr/local
 ENV PATH=$PATH:/usr/local/go/bin:/home/vscode/go/bin
@@ -44,7 +45,7 @@ RUN go get -v golang.org/x/tools/gopls \
 USER root
 
 ### Install nodejs & zx
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt install -y nodejs gcc g++ make
 RUN npm i -g zx
 

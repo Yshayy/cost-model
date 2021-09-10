@@ -14,9 +14,10 @@
 	
     // Add the IDs of extensions you want installed when the container is created.
     "extensions": [
-        "redhat.vscode-yaml",
-        "ms-kubernetes-tools.vscode-kubernetes-tools",
-    ],
+		"redhat.vscode-yaml",
+		"ms-kubernetes-tools.vscode-kubernetes-tools",
+		"golang.go"
+	],
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [8090],
@@ -26,7 +27,7 @@
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
-    // "postCreateCommand": [".devcontainer/init-k3d.ts"],
+    "postCreateCommand": [".devcontainer/init"],
     "runArgs": ["--init", "--privileged"],
     "overrideCommand": false
 }
