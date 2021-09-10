@@ -10,7 +10,7 @@ RUN go mod download
 # COPY the source code as the last step
 COPY . .
 # Build the binary
-RUN set -e ;\
+RUN --mount=id=kubecost-build-cache,type=cache,target=/root/.cache/go-build set -e ;\
     go test ./test/*.go;\
     go test ./pkg/*;\
     cd cmd/costmodel;\
